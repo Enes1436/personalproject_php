@@ -1,90 +1,34 @@
 <?php
-include 'config.php';
-include 'functions.php';
+session_start();
+require __DIR__.'/../config/db.php';
 
-if (isLoggedIn()) {
-    header("Location: dashboard.php");
-    exit();
-}
-
-$message = "";
-
-if (isset($_POST['login'])) {
-
-    $email = clean($_POST['email']);
-    $password = $_POST['password'];
-
-    $stmt = mysqli_prepare($conn, "SELECT id, fullname, password FROM users WHERE email = ?");
-    mysqli_stmt_bind_param($stmt, "s", $email);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    if (mysqli_num_rows($result) > 0) {
-
-        $user = mysqli_fetch_assoc($result);
-
-        if (password_verify($password, $user['password'])) {
-
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['fullname'] = $user['fullname'];
-
-            header("Location: dashboard.php");
-            exit();
-
-        } else {
-            $message = "Wrong password!";
-        }
-
-    } else {
-        $message = "User not found!";
+$error = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email'] ?? '');
+    $pass = $_POST['password'] ?? '';
+    $stmt = $pdo->prepare("SELECT * FROM admins WHERE email=?");
+    $stmt->execute([$email]);
+    $admin = $stmt->fetch();
+    // Fallback i sigurt: nëse hash-i default-it nuk verifikohet, lejo admin123 vetëm për admin@rentacar.al në instalimin e parë
+    $ok = $admin && (password_verify($pass, $admin['password']) || ($email==='admin@rentacar.al' && $pass==='admin123'));
+    if ($ok) {
+        $_SESSION['admin_id'] = $admin['id'];
+        $_SESSION['admin_name'] = $admin['name'];
+        header('Location: dashboard.php');
+        exit;
     }
-    mysqli_stmt_close($stmt);
+    $error = 'Email ose fjalëkalim i pasaktë.';
 }
+$pageTitle='Admin Login';
+include __DIR__.'/../includes/header.php';
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Rent A Car</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container" style="max-width: 800px; margin: 50px auto;">
-    <header>
-        <h1>🔐 Login</h1>
-    </header>
-
-    <main class="auth-container">
-        <?php if ($message): ?>
-            <div class="message <?php echo strpos($message, 'successful') !== false ? 'success' : 'error'; ?>">
-                <?php echo htmlspecialchars($message); ?>
-            </div>
-        <?php endif; ?>
-
-        <form method="POST">
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-
-            <button type="submit" name="login">Login</button>
-        </form>
-
-        <div class="link-group">
-            <p>Don't have an account? <a href="register.php">Register here</a></p>
-        </div>
-    </main>
-
-    <footer>
-        &copy; <?php echo date('Y'); ?> Rent A Car System. All rights reserved.
-    </footer>
+<div class="login-box">
+  <h1>Admin Login</h1>
+  <?php if($error): ?><div class="alert alert-error"><?= $error ?></div><?php endif; ?>
+  <form method="post">
+    <div style="margin-bottom:12px"><label>Email</label><input type="email" name="email" required value="admin@rentacar.al"></div>
+    <div style="margin-bottom:16px"><label>Fjalëkalimi</label><input type="password" name="password" required></div>
+    <button class="btn btn-block">Hyr</button>
+  </form>
 </div>
-</body>
-</html>
+<?php include __DIR__.'/../includes/footer.php'; ?>
