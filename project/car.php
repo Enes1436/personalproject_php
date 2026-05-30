@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/config/db.php';
+require __DIR__.'/db.php';
 session_start();
 
 $id = (int)($_GET['id'] ?? 0);
@@ -12,7 +12,7 @@ $success = $_SESSION['booking_success'] ?? null;
 unset($_SESSION['booking_success']);
 
 $pageTitle = $car['brand'].' '.$car['model'].' - Rezervo';
-include 'includes/header.php';
+include __DIR__.'/header.php';
 ?>
 
 <?php if ($success): ?>
@@ -67,4 +67,4 @@ function calc(){
 sd.addEventListener('change',calc); ed.addEventListener('change',calc);
 </script>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__.'/footer.php'; ?>

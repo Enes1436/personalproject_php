@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/config/db.php';
+require __DIR__.'/db.php';
 $pageTitle = 'Makinat me Qira - RentACar';
 
 $brand = trim($_GET['brand'] ?? '');
@@ -15,7 +15,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $cars = $stmt->fetchAll();
 
-include 'includes/header.php';
+include __DIR__.'/header.php';
 ?>
 <section class="hero">
   <h1>Makina me Qira në Shqipëri</h1>
@@ -45,4 +45,4 @@ include 'includes/header.php';
 </div>
 <?php endif; ?>
 
-<?php include 'includes/footer.php'; ?>
+<?php include __DIR__.'/footer.php'; ?>

@@ -5,17 +5,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= $pageTitle ?? 'Rent A Car Shqipëria' ?></title>
-<link rel="stylesheet" href="/rentacar/assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header class="site-header">
   <div class="container nav">
-    <a href="/rentacar/index.php" class="logo">🚗 RentACar</a>
+    <a href="index.php" class="logo">🚗 RentACar</a>
     <nav>
-      <a href="/rentacar/index.php">Makinat</a>
-      <a href="/rentacar/about.php">Rreth nesh</a>
-      <a href="/rentacar/contact.php">Kontakt</a>
-      <a href="/rentacar/admin/login.php" class="btn-ghost">Admin</a>
+      <a href="index.php">Makinat</a>
+      <a href="about.php">Rreth nesh</a>
+      <a href="contact.php">Kontakt</a>
+      <a href="login.php" class="btn-ghost">Admin</a>
     </nav>
   </div>
 </header>

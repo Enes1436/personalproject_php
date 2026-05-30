@@ -4,4 +4,4 @@ if (empty($_SESSION['admin_id'])) {
     header('Location: login.php');
     exit;
 }
-require __DIR__.'/../config/db.php';
+require __DIR__.'/db.php';

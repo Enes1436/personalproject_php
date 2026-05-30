@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/config/db.php';
+require __DIR__.'/db.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: index.php'); exit; }

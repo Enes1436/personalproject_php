@@ -1,3 +1,3 @@
   </section>
 </div>
-<?php include __DIR__.'/../includes/footer.php'; ?>
+<?php include __DIR__.'/footer.php'; ?>

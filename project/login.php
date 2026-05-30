@@ -1,6 +1,6 @@
 <?php
 session_start();
-require __DIR__.'/../config/db.php';
+require __DIR__.'/db.php';
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error = 'Email ose fjalëkalim i pasaktë.';
 }
 $pageTitle='Admin Login';
-include __DIR__.'/../includes/header.php';
+include __DIR__.'/header.php';
 ?>
 <div class="login-box">
   <h1>Admin Login</h1>
@@ -31,4 +31,4 @@ include __DIR__.'/../includes/header.php';
     <button class="btn btn-block">Hyr</button>
   </form>
 </div>
-<?php include __DIR__.'/../includes/footer.php'; ?>
+<?php include __DIR__.'/footer.php'; ?>       

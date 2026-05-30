@@ -1,0 +1,332 @@
+/* Base */
+:root {
+  color-scheme: light;
+  color: #111827;
+  background: #f8fafc;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  min-height: 100%;
+}
+body {
+  background: #f1f5f9;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: #0f172a;
+  text-decoration: none;
+}
+button, input, select, textarea {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+.container {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto;
+}
+.site-header,
+.site-footer {
+  background: #0f172a;
+  color: #f8fafc;
+}
+.site-header .nav,
+.site-footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 16px 0;
+}
+.site-header .logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.site-header nav {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.site-header nav a {
+  color: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 999px;
+}
+.site-header nav a:hover,
+.site-header nav a:focus-visible {
+  background: rgba(248,250,252,.12);
+}
+.btn-ghost,
+.btn,
+.btn-secondary,
+.btn-danger {
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn-ghost {
+  background: rgba(248,250,252,.08);
+  color: #f8fafc;
+}
+.btn {
+  background: #0f172a;
+  color: #f8fafc;
+}
+.btn-secondary {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+.btn-danger {
+  background: #dc2626;
+  color: #fff;
+}
+.btn:hover,
+.btn-ghost:hover,
+.btn-secondary:hover,
+.btn-danger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(15,23,42,.08);
+}
+main {
+  padding: 28px 0 48px;
+}
+.hero {
+  background: linear-gradient(135deg, #0f172a 0%, #2563eb 100%);
+  color: #f8fafc;
+  border-radius: 22px;
+  padding: 40px 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 20px 50px rgba(15,23,42,.12);
+}
+.hero h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2.2rem, 3.4vw, 3.4rem);
+}
+.hero p {
+  margin: 0;
+  max-width: 720px;
+  color: #e2e8f0;
+}
+.filters,
+.login-box,
+.booking,
+form {
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(15,23,42,.08);
+}
+.filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+.filters input,
+.booking input,
+.booking select,
+.booking textarea,
+.login-box input,
+.login-box select,
+.login-box textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: #f8fafc;
+  color: #0f172a;
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.form-row.full {
+  grid-column: 1 / -1;
+}
+.cars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.car-card {
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(15,23,42,.08);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.car-card:hover {
+  transform: translateY(-4px);
+}
+.car-card .img {
+  min-height: 240px;
+  position: relative;
+  border-bottom: 1px solid rgba(15,23,42,.08);
+  background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  box-shadow: inset 0 -10px 18px rgba(15,23,42,.08);
+}
+.car-card .img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(248,250,252,0) 45%, rgba(15,23,42,.22) 100%);
+}
+.car-card .body {
+  padding: 18px;
+}
+.car-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+.car-card .meta {
+  color: #64748b;
+  margin-bottom: 12px;
+}
+.car-card .price {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+.detail {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.detail .img {
+  min-height: 380px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0 -12px 24px rgba(15,23,42,.08);
+}
+.detail .img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(248,250,252,0) 40%, rgba(15,23,42,.16) 100%);
+}
+.detail h1 {
+  margin-top: 0;
+}
+.specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+.booking {
+  max-width: 720px;
+}
+.booking h2 {
+  margin-top: 0;
+}
+.alert {
+  padding: 16px 18px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+.alert-success {
+  background: #dcfce7;
+  color: #14532d;
+}
+.alert-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.badge {
+  display: inline-flex;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: .9rem;
+  font-weight: 700;
+}
+.badge-pending { background: #fcd34d; color: #92400e; }
+.badge-ok { background: #a7f3d0; color: #064e3b; }
+.badge-cancel { background: #fecaca; color: #7f1d1d; }
+.login-box {
+  max-width: 420px;
+  margin: 40px auto;
+}
+.login-box input {
+  margin-bottom: 14px;
+}
+.admin-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+}
+.sidebar {
+  background: #fff;
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 16px 40px rgba(15,23,42,.08);
+}
+.sidebar a {
+  display: block;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  color: #0f172a;
+}
+.sidebar a.active,
+.sidebar a:hover {
+  background: #e2e8f0;
+}
+.site-footer {
+  padding: 22px 0;
+}
+.site-footer p {
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .detail,
+  .admin-layout,
+  .filters,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .site-header .nav,
+  .site-header .nav a {
+    width: 100%;
+    justify-content: center;
+  }
+  .site-header .nav {
+    gap: 10px;
+  }
+}

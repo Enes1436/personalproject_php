@@ -47,4 +47,8 @@ INSERT INTO cars (brand, model, year, transmission, fuel, seats, price_per_day, 
 ('Mercedes-Benz', 'C-Class', 2022, 'Automatik', 'Benzine', 5, 90.00, 'Elegant dhe komod.'),
 ('Toyota', 'Yaris', 2020, 'Manual', 'Benzine', 5, 28.00, 'Ideal për qytet, konsum të ulët.'),
 ('Audi', 'Q5', 2021, 'Automatik', 'Naft', 5, 110.00, 'SUV i fuqishëm për familje.'),
-('Fiat', '500', 2019, 'Manual', 'Benzine', 4, 25.00, 'Kompakt dhe i thjeshtë për parkim.');
+('Fiat', '500', 2019, 'Manual', 'Benzine', 4, 25.00, 'Kompakt dhe i thjeshtë për parkim.'),
+('Nissan', 'Qashqai', 2022, 'Automatik', 'Naft', 5, 88.00, 'SUV familjar me hapësirë të bollshme.'),
+('Skoda', 'Octavia', 2021, 'Manual', 'Benzine', 5, 48.00, 'Sedan komod dhe ekonomik për udhëtime.'),
+('Hyundai', 'Tucson', 2023, 'Automatik', 'Hybrid', 5, 95.00, 'SUV modern me konsum të ulët.'),
+('Ford', 'Focus', 2020, 'Manual', 'Benzine', 5, 38.00, 'Sportiv dhe ideal për qytet.');
