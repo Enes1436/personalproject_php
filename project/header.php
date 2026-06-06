@@ -9,9 +9,12 @@
 </head>
 <body>
 <header class="site-header">
-  <div class="container nav">
-    <a href="index.php" class="logo">🚗 RentACar</a>
-    <nav>
+  <div class="container nav-wrap">
+    <div style="display:flex;align-items:center;gap:12px;justify-content:space-between;width:100%">
+      <a href="index.php" class="logo">🚗 RentACar</a>
+      <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false">☰</button>
+    </div>
+    <nav id="main-nav" class="nav-menu">
       <a href="index.php">Makinat</a>
       <a href="about.php">Rreth nesh</a>
       <a href="contact.php">Kontakt</a>
