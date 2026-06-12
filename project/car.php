@@ -20,7 +20,13 @@ include __DIR__.'/header.php';
 <?php endif; ?>
 
 <div class="detail">
-  <div class="img" <?php if($car['image']): ?>style="background-image:url('uploads/<?= htmlspecialchars($car['image']) ?>')"<?php endif; ?>></div>
+  <div class="img" <?php if($car['image']): ?>
+    <?php if (preg_match('#^https?://#i', $car['image'])): ?>
+      style="background-image:url('<?= htmlspecialchars($car['image']) ?>')"
+    <?php else: ?>
+      style="background-image:url('uploads/<?= htmlspecialchars($car['image']) ?>')"
+    <?php endif; ?>
+  <?php endif; ?>></div>
   <div>
     <h1><?= htmlspecialchars($car['brand'].' '.$car['model']) ?></h1>
     <p style="color:#64748b;margin:8px 0 14px"><?= htmlspecialchars($car['description']) ?></p>

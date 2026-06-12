@@ -1,6 +1,6 @@
 <?php
 $DB_HOST = 'localhost';
-$DB_NAME = 'rentacar';
+$DB_NAME = 'rentacar1';
 $DB_USER = 'root';
 $DB_PASS = '';
 

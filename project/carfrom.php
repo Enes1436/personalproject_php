@@ -24,10 +24,16 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     ];
 
     $image = $car['image'];
-    if (!empty($_FILES['image']['name'])) {
-        $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-        $image = uniqid('car_').'.'.$ext;
-        move_uploaded_file($_FILES['image']['tmp_name'], __DIR__.'/../uploads/'.$image);
+    // If user pasted an image URL, prefer that
+    $image_url = trim($_POST['image_url'] ?? '');
+    if ($image_url && filter_var($image_url, FILTER_VALIDATE_URL)) {
+      $image = $image_url;
+    } elseif (!empty($_FILES['image']['name'])) {
+      $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+      $image = uniqid('car_').'.'.$ext;
+      // ensure uploads dir exists
+      if (!is_dir(__DIR__.'/uploads')) mkdir(__DIR__.'/uploads', 0755, true);
+      move_uploaded_file($_FILES['image']['tmp_name'], __DIR__.'/uploads/'.$image);
     }
 
     if ($id) {
@@ -66,7 +72,14 @@ include '_layout.php';
   </div>
   <div class="form-row">
     <div><label>Vende</label><input type="number" name="seats" value="<?= $car['seats'] ?>"></div>
-    <div><label>Foto (opsionale)</label><input type="file" name="image" accept="image/*"></div>
+    <div>
+      <label>Foto (opsionale)</label>
+      <input type="file" name="image" accept="image/*">
+      <div style="margin-top:8px">
+        <label>Pasting image URL (optional)</label>
+        <input type="url" name="image_url" placeholder="https://example.com/photo.jpg" value="<?= htmlspecialchars(filter_var($car['image'], FILTER_VALIDATE_URL) ? $car['image'] : '') ?>">
+      </div>
+    </div>
   </div>
   <div class="form-row full"><div><label>Përshkrimi</label><textarea name="description" rows="3"><?= htmlspecialchars($car['description']) ?></textarea></div></div>
   <label><input type="checkbox" name="available" <?= $car['available']?'checked':'' ?>> Disponibël</label>

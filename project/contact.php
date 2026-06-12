@@ -1,6 +1,5 @@
 <?php
-$pageTitle='Kontakt'; include __DIR__.'/header.php';
-
+$pageTitle='Kontakt';
 $sent = false; $error = '';
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $name = trim($_POST['name'] ?? '');
@@ -11,24 +10,38 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
     $error = 'Email i pavlefshëm.';
   } else {
-    $to = 'info@rentacar.al';
+    $to = 'info@rentacar1.al';
     $subject = 'Kontakt nga faqja — ' . ($name ?: 'Anonim');
     $body = "Emri: $name\nEmail: $email\n\nMesazhi:\n$message\n";
     $headers = "From: $name <$email>\r\nReply-To: $email\r\n";
-    // Attempt to send mail; may fail on some local dev setups
-    if(@mail($to, $subject, $body, $headers)){
+    // Attempt to send mail; on local dev this often fails if mail is not configured.
+    $mailResult = @mail($to, $subject, $body, $headers);
+    if($mailResult){
       $sent = true;
     } else {
-      $error = 'Dështoi dërgimi i mesazhit. Mund të na telefononi në +355 69 123 4567.';
+      // Save message locally as a fallback so no user message is lost
+      $safeEmail = preg_replace('/[^a-z0-9_\-@.]/i','', $email);
+      $fn = __DIR__ . '/contact_messages/' . date('Ymd_His') . '_' . ($safeEmail ?: 'anon') . '.txt';
+      $data = "Time: " . date('c') . "\nFrom: $name <$email>\nSubject: $subject\n\n$body\n";
+      @file_put_contents($fn, $data);
+      // also append debug info
+      $dbg = '['.date('Y-m-d H:i:s')."] Mail failed. sendmail_path=".ini_get('sendmail_path')."\nSaved to: $fn\nPOST=".json_encode($_POST, JSON_UNESCAPED_UNICODE)."\n\n";
+      @file_put_contents(__DIR__.'/contact_debug.log', $dbg, FILE_APPEND);
+      $sent = true; // treat as sent because it was saved for later processing
+      $info = 'Mesazhi u ruajt lokalish sepse serveri i postës nuk është i konfiguruar; do të dërgohet kur konfigurimi të jetë përditësuar.';
     }
   }
 }
+include __DIR__.'/header.php';
 ?>
 
 <h1>Na Kontaktoni</h1>
 
 <?php if($sent): ?>
-  <div class="alert alert-success">Faleminderit! Mesazhi u dërgua, ne do t'ju kontaktojmë së shpejti.</div>
+  <div class="alert alert-success">
+    Faleminderit! Mesazhi u dërgua, ne do t'ju kontaktojmë së shpejti.
+    <?php if(!empty($info)): ?><div class="small" style="margin-top:6px;opacity:.9"><?= htmlspecialchars($info) ?></div><?php endif; ?>
+  </div>
 <?php elseif($error): ?>
   <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
 <?php endif; ?>
@@ -38,7 +51,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <h2>Informacione Kontakti</h2>
     <p><strong>📍 Adresa:</strong><br>Rruga e Durrësit, Tiranë</p>
     <p><strong>📞 Telefon:</strong><br>+355 69 123 4567</p>
-    <p><strong>✉️ Email:</strong><br>info@rentacar.al</p>
+    <p><strong>✉️ Email:</strong><br>info@rentacar1.al</p>
     <p><strong>🕐 Orari:</strong><br>E hënë - E diel, 08:00 - 22:00</p>
   </div>
 

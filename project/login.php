@@ -9,8 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $pdo->prepare("SELECT * FROM admins WHERE email=?");
     $stmt->execute([$email]);
     $admin = $stmt->fetch();
-    // Fallback i sigurt: nëse hash-i default-it nuk verifikohet, lejo admin123 vetëm për admin@rentacar.al në instalimin e parë
-    $ok = $admin && (password_verify($pass, $admin['password']) || ($email==='admin@rentacar.al' && $pass==='admin123'));
+    // Fallback i sigurt: nëse hash-i default-it nuk verifikohet, lejo admin123 vetëm për admin@rentacar1.al në instalimin e parë
+    $ok = $admin && (password_verify($pass, $admin['password']) || ($email==='admin@rentacar1.al' && $pass==='admin123'));
     if ($ok) {
         $_SESSION['admin_id'] = $admin['id'];
         $_SESSION['admin_name'] = $admin['name'];
@@ -26,7 +26,7 @@ include __DIR__.'/header.php';
   <h1>Admin Login</h1>
   <?php if($error): ?><div class="alert alert-error"><?= $error ?></div><?php endif; ?>
   <form method="post">
-    <div style="margin-bottom:12px"><label>Email</label><input type="email" name="email" required value="admin@rentacar.al"></div>
+    <div style="margin-bottom:12px"><label>Email</label><input type="email" name="email" required value="admin@rentacar1.al"></div>
     <div style="margin-bottom:16px"><label>Fjalëkalimi</label><input type="password" name="password" required></div>
     <button class="btn btn-block">Hyr</button>
   </form>

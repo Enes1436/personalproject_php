@@ -6,11 +6,11 @@ Sistem i plotë për rent a car me PHP 8+ dhe MySQL.
 1. Kopjo folderin në `htdocs` (XAMPP) ose `www` (WAMP).
 2. Krijo databazën duke importuar `database.sql` në phpMyAdmin.
 3. Konfiguro `config/db.php` me të dhënat e MySQL.
-4. Hap `http://localhost/rentacar/`.
+4. Hap `http://localhost/rentacar1/`.
 
 ## Admin
 - URL: `/admin/login.php`
-- Email: `admin@rentacar.al`
+- Email: `admin@rentacar1.al`
 - Fjalëkalimi: `admin123`
 
 ## Funksionalitete

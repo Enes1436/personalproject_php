@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS rentacar CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE rentacar;
+CREATE DATABASE IF NOT EXISTS rentacar1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE rentacar1;
 
 CREATE TABLE cars (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,9 +37,9 @@ CREATE TABLE admins (
     name VARCHAR(80) NOT NULL
 ) ENGINE=InnoDB;
 
--- Admin default: admin@rentacar.al / admin123
+-- Admin default: admin@rentacar1.al / admin123
 INSERT INTO admins (email, password, name) VALUES
-('admin@rentacar.al', '$2y$10$Q8q5K2nQ4VxX5xWZ8yJ1Y.7vYfZcK9LJ1mD3Lk5n7Hb8X9.dZqV6e', 'Admin');
+('admin@rentacar1.al', '$2y$10$Q8q5K2nQ4VxX5xWZ8yJ1Y.7vYfZcK9LJ1mD3Lk5n7Hb8X9.dZqV6e', 'Admin');
 
 INSERT INTO cars (brand, model, year, transmission, fuel, seats, price_per_day, description) VALUES
 ('Volkswagen', 'Golf 7', 2019, 'Manual', 'Naft', 5, 35.00, 'Komod dhe ekonomik per qytet.'),

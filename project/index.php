@@ -34,7 +34,13 @@ include __DIR__.'/header.php';
 <div class="cars-grid">
   <?php foreach ($cars as $c): ?>
     <a class="car-card" href="car.php?id=<?= $c['id'] ?>" style="text-decoration:none;color:inherit">
-      <div class="img" <?php if($c['image']): ?>style="background-image:url('uploads/<?= htmlspecialchars($c['image']) ?>')"<?php endif; ?>></div>
+      <div class="img" <?php if($c['image']): ?>
+        <?php if (preg_match('#^https?://#i', $c['image'])): ?>
+          style="background-image:url('<?= htmlspecialchars($c['image']) ?>')"
+        <?php else: ?>
+          style="background-image:url('uploads/<?= htmlspecialchars($c['image']) ?>')"
+        <?php endif; ?>
+      <?php endif; ?>></div>
       <div class="body">
         <h3><?= htmlspecialchars($c['brand'].' '.$c['model']) ?></h3>
         <div class="meta"><?= $c['year'] ?> · <?= htmlspecialchars($c['transmission']) ?> · <?= htmlspecialchars($c['fuel']) ?></div>

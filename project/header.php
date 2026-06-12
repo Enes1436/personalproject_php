@@ -18,6 +18,12 @@
       <a href="index.php">Makinat</a>
       <a href="about.php">Rreth nesh</a>
       <a href="contact.php">Kontakt</a>
+      <?php if (!empty($_SESSION['user_id'])): ?>
+        <a href="user_logout.php">Dil (<?= htmlspecialchars($_SESSION['user_fullname']) ?>)</a>
+      <?php else: ?>
+        <a href="user_login.php">Hyr</a>
+        <a href="user_register.php">Regjistrohu</a>
+      <?php endif; ?>
       <a href="login.php" class="btn-ghost">Admin</a>
     </nav>
   </div>
